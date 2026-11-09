@@ -1,5 +1,6 @@
 package h.burgenland.simulator.lab;
 
+import h.burgenland.simulator.common.CidEncoding;
 import h.burgenland.simulator.common.Scaling;
 import h.burgenland.simulator.common.StepTimings;
 import h.burgenland.simulator.mci.MciEvaluation;
@@ -70,7 +71,7 @@ public class LabAnalysisService {
                 Scaling.toContractScale(MciEvaluation.evaluateVariety(reportData.variety())));
 
         TransactionReceipt receipt = qualityIndex
-                .submitPHQIData(BigInteger.valueOf(batchId), phqiInput, variety, cid)
+                .submitPHQIData(BigInteger.valueOf(batchId), phqiInput, variety, CidEncoding.toBytes32(cid))
                 .send();
         long end = System.nanoTime();
 

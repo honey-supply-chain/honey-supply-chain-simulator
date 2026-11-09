@@ -1,5 +1,6 @@
 package h.burgenland.simulator.certification;
 
+import h.burgenland.simulator.common.CidEncoding;
 import h.burgenland.simulator.common.Scaling;
 import h.burgenland.simulator.common.StepTimings;
 import h.burgenland.simulator.lab.PinataClient;
@@ -64,7 +65,7 @@ public class CertificationService {
         }
         long afterUpload = System.nanoTime();
 
-        TransactionReceipt receipt = actorRegistry.setCertification(beekeeperAddress, cid, organicScore).send();
+        TransactionReceipt receipt = actorRegistry.setCertification(beekeeperAddress, CidEncoding.toBytes32(cid), organicScore).send();
         long end = System.nanoTime();
 
         return new CertificationResult(certification, cid, receipt.getTransactionHash(), receipt.getGasUsed(),

@@ -1,5 +1,6 @@
 package h.burgenland.simulator.award;
 
+import h.burgenland.simulator.common.CidEncoding;
 import h.burgenland.simulator.common.Scaling;
 import h.burgenland.simulator.common.StepTimings;
 import h.burgenland.simulator.lab.PinataClient;
@@ -56,7 +57,7 @@ public class AwardService {
                 contractAddresses.qualityIndex(), web3j, transactions.managerFor(awardBodyCredentials),
                 transactions.gasProvider());
 
-        TransactionReceipt receipt = qualityIndex.submitAward(BigInteger.valueOf(batchId), level, cid).send();
+        TransactionReceipt receipt = qualityIndex.submitAward(BigInteger.valueOf(batchId), level, CidEncoding.toBytes32(cid)).send();
         long end = System.nanoTime();
 
         return new AwardResult(award, cid, receipt.getTransactionHash(), receipt.getGasUsed(),
